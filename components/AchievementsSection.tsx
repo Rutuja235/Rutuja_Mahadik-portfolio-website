@@ -28,10 +28,11 @@ export function AchievementsSection() {
   };
 
   const certifications = [
-    'AI-ML Virtual Internship',
-    'Google Cloud Basics',
-    'CUDA Python Fundamentals',
-    'Data Science Master Virtual Internship',
+    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: '/Data-Visualization-Tata-Certificate.pdf', date: 'July 2025' },
+    { name: 'AI-ML Virtual Internship', issuer: '', file: null, date: '' },
+    { name: 'Google Cloud Basics', issuer: '', file: null, date: '' },
+    { name: 'CUDA Python Fundamentals', issuer: '', file: null, date: '' },
+    { name: 'Data Science Master Virtual Internship', issuer: '', file: null, date: '' },
   ];
 
   return (
@@ -113,10 +114,21 @@ export function AchievementsSection() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-dark rounded-lg p-4 flex items-center gap-3 hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
+                className={`rounded-lg p-4 flex items-center gap-3 transition-all ${
+                  cert.file
+                    ? 'glass-dark hover:shadow-lg hover:shadow-cyan-500/20 cursor-pointer'
+                    : 'glass-dark hover:shadow-lg hover:shadow-purple-500/20'
+                }`}
+                onClick={() => cert.file && window.open(cert.file, '_blank')}
               >
-                <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500"></div>
-                <p className="text-muted-foreground">{cert}</p>
+                <div className={`w-2 h-2 rounded-full ${cert.file ? 'bg-gradient-to-r from-cyan-400 to-blue-500' : 'bg-gradient-to-r from-purple-400 to-pink-500'}`}></div>
+                <div className="flex-1">
+                  <p className="text-muted-foreground text-sm">{cert.name}</p>
+                  {cert.issuer && <p className="text-xs text-cyan-400 font-semibold">{cert.issuer} • {cert.date}</p>}
+                </div>
+                {cert.file && (
+                  <div className="text-cyan-400 text-xs font-semibold">View</div>
+                )}
               </motion.div>
             ))}
           </motion.div>
