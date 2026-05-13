@@ -19,7 +19,13 @@ export function Navigation() {
   ];
 
   const certifications = [
-    { name: 'Data Visualization', issuer: 'Tata Group', file: '/Data-Visualization-Tata-Certificate.pdf' },
+    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: '/Data-Visualization-Tata-Certificate.pdf', type: 'Certification' },
+    { name: 'NVIDIA Certificate', issuer: 'NVIDIA', file: '/NVDIA-Certificate.pdf', type: 'Certification' },
+    { name: 'Python Full Stack', issuer: 'Eduskill Internship', file: '/Python-Full-Stack-Eduskill.pdf', type: 'Internship' },
+    { name: 'Data Science Master', issuer: 'Eduskill Internship', file: '/Data-Science-Master-Eduskill.pdf', type: 'Internship' },
+    { name: 'Generative AI', issuer: 'Eduskill Internship', file: '/Generative-AI-Eduskill.pdf', type: 'Internship' },
+    { name: 'Google AI-ML', issuer: 'Eduskill Internship', file: '/Google-AI-ML-Eduskill.pdf', type: 'Internship' },
+    { name: 'AWS', issuer: 'Eduskill Internship', file: '/AWS-Eduskill.pdf', type: 'Internship' },
   ];
 
   useEffect(() => {
@@ -94,14 +100,35 @@ export function Navigation() {
               >
                 Certifications
               </motion.button>
-              <div className="absolute right-0 mt-0 w-64 bg-slate-950/95 border border-white/10 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-lg backdrop-blur-md">
-                {certifications.map((cert, idx) => (
+              <div className="absolute right-0 mt-0 w-80 bg-slate-950/95 border border-white/10 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-lg backdrop-blur-md max-h-96 overflow-y-auto">
+                {/* Certifications */}
+                <div className="px-4 py-3 border-b border-white/10 sticky top-0 bg-slate-950/95 backdrop-blur-md">
+                  <p className="text-xs font-semibold text-cyan-400">CERTIFICATIONS</p>
+                </div>
+                {certifications.filter(c => c.type === 'Certification').map((cert, idx) => (
                   <a
                     key={idx}
                     href={cert.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-4 py-3 text-sm text-muted-foreground hover:text-cyan-400 hover:bg-white/5 border-b border-white/5 last:border-b-0 transition-colors"
+                    className="block px-4 py-3 text-sm text-muted-foreground hover:text-cyan-400 hover:bg-white/5 border-b border-white/5 transition-colors"
+                  >
+                    <div className="font-medium text-foreground">{cert.name}</div>
+                    <div className="text-xs text-muted-foreground">{cert.issuer}</div>
+                  </a>
+                ))}
+                
+                {/* Eduskill Internships */}
+                <div className="px-4 py-3 border-b border-white/10 sticky top-12 bg-slate-950/95 backdrop-blur-md">
+                  <p className="text-xs font-semibold text-purple-400">EDUSKILL INTERNSHIPS</p>
+                </div>
+                {certifications.filter(c => c.type === 'Internship').map((cert, idx) => (
+                  <a
+                    key={idx}
+                    href={cert.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-3 text-sm text-muted-foreground hover:text-purple-400 hover:bg-white/5 border-b border-white/5 last:border-b-0 transition-colors"
                   >
                     <div className="font-medium text-foreground">{cert.name}</div>
                     <div className="text-xs text-muted-foreground">{cert.issuer}</div>
@@ -146,14 +173,28 @@ export function Navigation() {
             
             {/* Mobile Certifications Section */}
             <div className="px-4 py-2 border-t border-white/10 mt-2">
-              <p className="text-xs font-semibold text-cyan-400 mb-2">Certifications</p>
-              {certifications.map((cert, idx) => (
+              <p className="text-xs font-semibold text-cyan-400 mb-2">CERTIFICATIONS</p>
+              {certifications.filter(c => c.type === 'Certification').map((cert, idx) => (
                 <a
                   key={idx}
                   href={cert.file}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-left px-2 py-2 text-xs text-muted-foreground hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                >
+                  <div className="font-medium text-foreground">{cert.name}</div>
+                  <div className="text-xs text-muted-foreground">{cert.issuer}</div>
+                </a>
+              ))}
+              
+              <p className="text-xs font-semibold text-purple-400 mb-2 mt-3">EDUSKILL INTERNSHIPS</p>
+              {certifications.filter(c => c.type === 'Internship').map((cert, idx) => (
+                <a
+                  key={idx}
+                  href={cert.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-left px-2 py-2 text-xs text-muted-foreground hover:text-purple-400 hover:bg-white/5 rounded transition-colors"
                 >
                   <div className="font-medium text-foreground">{cert.name}</div>
                   <div className="text-xs text-muted-foreground">{cert.issuer}</div>
