@@ -12,19 +12,35 @@ export function ContactSection() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setError('');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // For production, integrate with email service
-    console.log('[v0] Form submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 3000);
+    setLoading(true);
+    
+    try {
+      // Send email directly via mailto and show success message
+      const mailtoLink = `mailto:rutujamahadik23@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      console.log('[v0] Form submitted:', formData);
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (err) {
+      setError('Failed to send message. Please try again.');
+      console.error('[v0] Error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,8 +86,8 @@ export function ContactSection() {
                 <Github className="w-6 h-6 text-pink-400 mt-1 flex-shrink-0" />
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">GitHub</h3>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-pink-400 transition-colors">
-                    My Repository
+                  <a href="https://github.com/Rutuja235" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-pink-400 transition-colors">
+                    github.com/Rutuja235
                   </a>
                 </div>
               </div>
@@ -130,17 +146,24 @@ export function ContactSection() {
 
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-background font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all flex items-center justify-center gap-2"
+              disabled={loading}
+              whileHover={{ scale: !loading ? 1.05 : 1 }}
+              whileTap={{ scale: !loading ? 0.95 : 1 }}
+              className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-background font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="w-4 h-4" />
-              Send Message
+              {loading ? 'Sending...' : 'Send Message'}
             </motion.button>
+
+            {error && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-red-500/20 border border-red-500/50 rounded-lg p-3 text-center text-red-300 text-sm">
+                {error}
+              </motion.div>
+            )}
 
             {submitted && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-3 text-center text-green-300 text-sm">
-                Thank you! I&apos;ll get back to you soon.
+                Thanks for reaching out! I&apos;ll get back to you soon. Your email client should open automatically.
               </motion.div>
             )}
           </motion.form>

@@ -69,7 +69,7 @@ export function HeroSection() {
           <a href="https://linkedin.com/in/rutuja-mahadik-b8a939258" target="_blank" rel="noopener noreferrer" className="p-3 rounded-lg glass-dark hover:shadow-lg hover:shadow-cyan-500/30 transition-all hover:scale-110">
             <Linkedin className="w-6 h-6 text-cyan-400" />
           </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 rounded-lg glass-dark hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:scale-110">
+          <a href="https://github.com/Rutuja235" target="_blank" rel="noopener noreferrer" className="p-3 rounded-lg glass-dark hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:scale-110">
             <Github className="w-6 h-6 text-purple-400" />
           </a>
           <a href="mailto:rutujamahadik23@gmail.com" className="p-3 rounded-lg glass-dark hover:shadow-lg hover:shadow-pink-500/30 transition-all hover:scale-110">

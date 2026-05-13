@@ -52,7 +52,7 @@ export function FooterSection() {
                 <a href="https://linkedin.com/in/rutuja-mahadik-b8a939258" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg glass-dark hover:shadow-lg hover:shadow-purple-500/30 transition-all">
                   <Linkedin className="w-5 h-5 text-purple-400" />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg glass-dark hover:shadow-lg hover:shadow-pink-500/30 transition-all">
+                <a href="https://github.com/Rutuja235" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg glass-dark hover:shadow-lg hover:shadow-pink-500/30 transition-all">
                   <Github className="w-5 h-5 text-pink-400" />
                 </a>
                 <a href="mailto:rutujamahadik23@gmail.com" className="p-2 rounded-lg glass-dark hover:shadow-lg hover:shadow-cyan-500/30 transition-all">
