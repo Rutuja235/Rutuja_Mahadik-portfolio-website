@@ -2,6 +2,7 @@
 
 import { ParticleBackground } from '@/components/ParticleBackground';
 import { ScrollProgress } from '@/components/ScrollProgress';
+import { Navigation } from '@/components/Navigation';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { SkillsSection } from '@/components/SkillsSection';
@@ -16,6 +17,9 @@ export default function Home() {
     <main className="relative">
       {/* Particle background */}
       <ParticleBackground />
+
+      {/* Navigation */}
+      <Navigation />
 
       {/* Scroll progress bar */}
       <ScrollProgress />
