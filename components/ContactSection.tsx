@@ -21,7 +21,7 @@ export function ContactSection() {
     setError('');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Validate form
@@ -40,21 +40,33 @@ export function ContactSection() {
     setLoading(true);
     
     try {
-      // Create mailto link but don't navigate, just show success
-      const mailtoLink = `mailto:rutujamahadik23@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      
-      // Open mailto in new tab/window instead of redirecting
-      window.open(mailtoLink, '_blank');
-      
-      // Show success message
-      console.log('[v0] Form submitted:', formData);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
+      // Send to FormSubmit.co (free form backend, no API key needed)
+      const response = await fetch('https://formsubmit.co/ajax/rutujamahadik23@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('[v0] Form submitted successfully:', formData);
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setError('');
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (err) {
-      setError('Failed to send message. Please try again.');
+      setError('Failed to send message. Please try again or email directly at rutujamahadik23@gmail.com');
       console.error('[v0] Error:', err);
     } finally {
       setLoading(false);
@@ -180,9 +192,9 @@ export function ContactSection() {
             )}
 
             {submitted && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-3 text-center text-green-300 text-sm">
-                <p className="font-semibold">Message submitted successfully!</p>
-                <p>Your default email client will open. If it doesn&apos;t, you can send your message directly to: <strong>rutujamahadik23@gmail.com</strong></p>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 text-center text-green-300 text-sm">
+                <p className="font-semibold mb-1">🎉 Message sent successfully!</p>
+                <p>Thank you for reaching out! I&apos;ll get back to you as soon as possible at <strong>{formData.email}</strong></p>
               </motion.div>
             )}
           </motion.form>
