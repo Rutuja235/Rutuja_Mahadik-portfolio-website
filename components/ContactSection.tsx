@@ -23,18 +23,36 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
     setLoading(true);
     
     try {
-      // Send email directly via mailto and show success message
+      // Create mailto link but don't navigate, just show success
       const mailtoLink = `mailto:rutujamahadik23@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      window.location.href = mailtoLink;
+      
+      // Open mailto in new tab/window instead of redirecting
+      window.open(mailtoLink, '_blank');
       
       // Show success message
       console.log('[v0] Form submitted:', formData);
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 4000);
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       setError('Failed to send message. Please try again.');
       console.error('[v0] Error:', err);
@@ -163,7 +181,8 @@ export function ContactSection() {
 
             {submitted && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-3 text-center text-green-300 text-sm">
-                Thanks for reaching out! I&apos;ll get back to you soon. Your email client should open automatically.
+                <p className="font-semibold">Message submitted successfully!</p>
+                <p>Your default email client will open. If it doesn&apos;t, you can send your message directly to: <strong>rutujamahadik23@gmail.com</strong></p>
               </motion.div>
             )}
           </motion.form>
