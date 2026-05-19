@@ -55,8 +55,9 @@ export function HeroSection() {
                 View Projects
               </button>
               <a
-                href="/Rutuja-Mahadik-Resume.pdf"
-                download
+                href="https://blobs.vusercontent.net/blob/Rutuja.Mahadik_Resume-olMKBYH6ekkaMl2xQzEjtZYcG81rwI.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-3 rounded-lg glass-dark border border-purple-500/50 text-purple-300 font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:scale-105 flex items-center justify-center gap-2"
               >
                 Download Resume
