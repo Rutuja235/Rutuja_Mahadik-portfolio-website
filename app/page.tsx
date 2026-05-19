@@ -8,6 +8,7 @@ import { AboutSection } from '@/components/AboutSection';
 import { SkillsSection } from '@/components/SkillsSection';
 import { ExperienceSection } from '@/components/ExperienceSection';
 import { ProjectsSection } from '@/components/ProjectsSection';
+import { PublicationsSection } from '@/components/PublicationsSection';
 import { AchievementsSection } from '@/components/AchievementsSection';
 import { ContactSection } from '@/components/ContactSection';
 import { FooterSection } from '@/components/FooterSection';
@@ -31,6 +32,7 @@ export default function Home() {
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
+        <PublicationsSection />
         <AchievementsSection />
         <ContactSection />
         <FooterSection />
