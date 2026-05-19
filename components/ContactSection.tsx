@@ -21,22 +21,51 @@ export function ContactSection() {
     setError('');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Validate form
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
     setLoading(true);
     
     try {
-      // Send email directly via mailto and show success message
-      const mailtoLink = `mailto:rutujamahadik23@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-      window.location.href = mailtoLink;
-      
-      // Show success message
-      console.log('[v0] Form submitted:', formData);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 4000);
+      // Send using FormData (required by FormSubmit.co)
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('_subject', `New message from ${formData.name}`);
+      formDataToSend.append('_captcha', 'false');
+
+      const response = await fetch('https://formsubmit.co/rutujamahadik23@gmail.com', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        console.log('[v0] Form submitted successfully:', formData);
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setError('');
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (err) {
-      setError('Failed to send message. Please try again.');
+      setError('Failed to send message. Please try again or email directly at rutujamahadik23@gmail.com');
       console.error('[v0] Error:', err);
     } finally {
       setLoading(false);
@@ -162,8 +191,9 @@ export function ContactSection() {
             )}
 
             {submitted && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-3 text-center text-green-300 text-sm">
-                Thanks for reaching out! I&apos;ll get back to you soon. Your email client should open automatically.
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 text-center text-green-300 text-sm">
+                <p className="font-semibold mb-1">🎉 Message sent successfully!</p>
+                <p>Thank you for reaching out! I&apos;ll get back to you as soon as possible at <strong>{formData.email}</strong></p>
               </motion.div>
             )}
           </motion.form>

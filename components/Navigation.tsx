@@ -14,18 +14,19 @@ export function Navigation() {
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
+    { id: 'publications', label: 'Publications' },
     { id: 'achievements', label: 'Achievements' },
     { id: 'contact', label: 'Contact' },
   ];
 
   const certifications = [
-    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: '/Data-Visualization-Tata-Certificate.pdf', type: 'Certification' },
-    { name: 'NVIDIA Certificate', issuer: 'NVIDIA', file: '/NVDIA-Certificate.pdf', type: 'Certification' },
-    { name: 'Python Full Stack', issuer: 'Eduskill Internship', file: '/Python-Full-Stack-Eduskill.pdf', type: 'Internship' },
-    { name: 'Data Science Master', issuer: 'Eduskill Internship', file: '/Data-Science-Master-Eduskill.pdf', type: 'Internship' },
-    { name: 'Generative AI', issuer: 'Eduskill Internship', file: '/Generative-AI-Eduskill.pdf', type: 'Internship' },
-    { name: 'Google AI-ML', issuer: 'Eduskill Internship', file: '/Google-AI-ML-Eduskill.pdf', type: 'Internship' },
-    { name: 'AWS', issuer: 'Eduskill Internship', file: '/AWS-Eduskill.pdf', type: 'Internship' },
+    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: 'https://blobs.vusercontent.net/blob/Data_visulization_Tata-9GfXHbXTSmDALWCTfm5x6VqPAz7jtj.pdf', type: 'Certification' },
+    { name: 'NVIDIA Certificate', issuer: 'NVIDIA', file: 'https://blobs.vusercontent.net/blob/NVDIA%20Certificate-YobP6Y9YpOluwn1tfsBP7K8RpnKhU7.pdf', type: 'Certification' },
+    { name: 'Python Full Stack', issuer: 'Eduskill Internship', file: 'https://blobs.vusercontent.net/blob/Python%20Full%20Stack-TloWd7xTWutpcndD0LHZ1gv7vrsalF.pdf', type: 'Internship' },
+    { name: 'Data Science Master', issuer: 'Eduskill Internship', file: 'https://blobs.vusercontent.net/blob/Data%20Science%20Master-khvVw14VrKwW5IFodmYUKg0shB99gA.pdf', type: 'Internship' },
+    { name: 'Generative AI', issuer: 'Eduskill Internship', file: 'https://blobs.vusercontent.net/blob/Generative%20AI-VvApRNduMVyyBGz2Dl1nibN2L5tVT7.pdf', type: 'Internship' },
+    { name: 'Google AI-ML', issuer: 'Eduskill Internship', file: 'https://blobs.vusercontent.net/blob/Google%20AI-ML-qFnycjkbQ8u88YXwllE1tAQVINwvDN.pdf', type: 'Internship' },
+    { name: 'AWS', issuer: 'Eduskill Internship', file: 'https://blobs.vusercontent.net/blob/AWS-9FTfanRi1eiTbNLoA641ECjU4Ac4fB.pdf', type: 'Internship' },
   ];
 
   useEffect(() => {

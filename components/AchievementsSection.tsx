@@ -28,16 +28,16 @@ export function AchievementsSection() {
   };
 
   const certifications = [
-    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: '/Data-Visualization-Tata-Certificate.pdf' },
-    { name: 'NVIDIA Certificate', issuer: 'NVIDIA', file: '/NVDIA-Certificate.pdf' },
+    { name: 'Data Visualization: Empowering Business with Effective Insights', issuer: 'Tata Group', file: 'https://blobs.vusercontent.net/blob/Data_visulization_Tata-9GfXHbXTSmDALWCTfm5x6VqPAz7jtj.pdf' },
+    { name: 'NVIDIA Certificate', issuer: 'NVIDIA', file: 'https://blobs.vusercontent.net/blob/NVDIA%20Certificate-YobP6Y9YpOluwn1tfsBP7K8RpnKhU7.pdf' },
   ];
 
   const eduskillInternships = [
-    { name: 'Python Full Stack', file: '/Python-Full-Stack-Eduskill.pdf' },
-    { name: 'Data Science Master', file: '/Data-Science-Master-Eduskill.pdf' },
-    { name: 'Generative AI', file: '/Generative-AI-Eduskill.pdf' },
-    { name: 'Google AI-ML', file: '/Google-AI-ML-Eduskill.pdf' },
-    { name: 'AWS', file: '/AWS-Eduskill.pdf' },
+    { name: 'Python Full Stack', file: 'https://blobs.vusercontent.net/blob/Python%20Full%20Stack-TloWd7xTWutpcndD0LHZ1gv7vrsalF.pdf' },
+    { name: 'Data Science Master', file: 'https://blobs.vusercontent.net/blob/Data%20Science%20Master-khvVw14VrKwW5IFodmYUKg0shB99gA.pdf' },
+    { name: 'Generative AI', file: 'https://blobs.vusercontent.net/blob/Generative%20AI-VvApRNduMVyyBGz2Dl1nibN2L5tVT7.pdf' },
+    { name: 'Google AI-ML', file: 'https://blobs.vusercontent.net/blob/Google%20AI-ML-qFnycjkbQ8u88YXwllE1tAQVINwvDN.pdf' },
+    { name: 'AWS', file: 'https://blobs.vusercontent.net/blob/AWS-9FTfanRi1eiTbNLoA641ECjU4Ac4fB.pdf' },
   ];
 
   return (
