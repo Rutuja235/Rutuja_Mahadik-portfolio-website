@@ -40,18 +40,17 @@ export function ContactSection() {
     setLoading(true);
     
     try {
-      // Send to FormSubmit.co (free form backend, no API key needed)
-      const response = await fetch('https://formsubmit.co/ajax/rutujamahadik23@gmail.com', {
+      // Send using FormData (required by FormSubmit.co)
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('_subject', `New message from ${formData.name}`);
+      formDataToSend.append('_captcha', 'false');
+
+      const response = await fetch('https://formsubmit.co/rutujamahadik23@gmail.com', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+        body: formDataToSend,
       });
 
       if (response.ok) {
