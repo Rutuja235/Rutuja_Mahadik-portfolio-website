@@ -23,7 +23,7 @@ export function AchievementsSection() {
     institution: 'Dr. J.J. Magdum College of Engineering',
     location: 'Jaysingpur',
     degree: 'B.Tech in Artificial Intelligence and Data Science Engineering',
-    duration: 'Nov 2022 - Present',
+    duration: 'Nov 2022 - June 2026',
     cgpa: '9.13',
   };
 
