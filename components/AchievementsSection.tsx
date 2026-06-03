@@ -13,7 +13,7 @@ export function AchievementsSection() {
     },
     {
       title: 'President – ISTE Student Chapter',
-      date: 'Nov 2022 - Present',
+      date: 'Nov 2022 - May 2026',
       description: 'Leading a team of 25+ members, organizing technical workshops and mentoring students',
       icon: '👥',
     },
