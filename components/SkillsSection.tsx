@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { SkillBadge } from './SkillBadge';
 
 const skillsData = [
   {
@@ -42,48 +41,98 @@ const skillsData = [
 ];
 
 export function SkillsSection() {
+  const getGradient = (color: string) => {
+    switch (color) {
+      case 'cyan':
+        return 'from-cyan-400 to-blue-500';
+      case 'purple':
+        return 'from-purple-400 to-pink-500';
+      case 'pink':
+        return 'from-pink-400 to-rose-500';
+      case 'blue':
+        return 'from-blue-400 to-cyan-500';
+      default:
+        return 'from-cyan-400 to-blue-500';
+    }
+  };
+
+  const getBorderAndShadow = (color: string) => {
+    switch (color) {
+      case 'cyan':
+        return { border: 'border-cyan-500/30', shadow: 'hover:shadow-cyan-500/30' };
+      case 'purple':
+        return { border: 'border-purple-500/30', shadow: 'hover:shadow-purple-500/30' };
+      case 'pink':
+        return { border: 'border-pink-500/30', shadow: 'hover:shadow-pink-500/30' };
+      case 'blue':
+        return { border: 'border-blue-500/30', shadow: 'hover:shadow-blue-500/30' };
+      default:
+        return { border: 'border-cyan-500/30', shadow: 'hover:shadow-cyan-500/30' };
+    }
+  };
+
+  const getTextColor = (color: string) => {
+    switch (color) {
+      case 'cyan':
+        return 'text-cyan-300';
+      case 'purple':
+        return 'text-purple-300';
+      case 'pink':
+        return 'text-pink-300';
+      case 'blue':
+        return 'text-blue-300';
+      default:
+        return 'text-cyan-300';
+    }
+  };
+
   return (
     <section id="skills" className="relative py-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Section title */}
         <motion.div initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-2">
-            <span className="gradient-text">Technical</span> Skills
+            Technical <span className="gradient-text">Skills</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
         </motion.div>
 
-        {/* Skills Grid by Category */}
-        <div className="space-y-12">
-          {skillsData.map((category, categoryIndex) => (
-            <motion.div
-              key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              className="glass-dark rounded-lg p-6"
-            >
-              {/* Category Title */}
-              <h3 className="text-xl md:text-2xl font-semibold mb-4">
-                <span className={`bg-gradient-to-r ${
-                  category.color === 'cyan' ? 'from-cyan-400 to-blue-500' :
-                  category.color === 'purple' ? 'from-purple-400 to-pink-500' :
-                  category.color === 'pink' ? 'from-pink-400 to-rose-500' :
-                  'from-blue-400 to-cyan-500'
-                } bg-clip-text text-transparent`}>
+        {/* Skills Grid - Vertical Cards */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillsData.map((category, index) => {
+            const { border, shadow } = getBorderAndShadow(category.color);
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`glass-dark rounded-xl p-6 border ${border} ${shadow} hover:shadow-2xl transition-all`}
+              >
+                {/* Category Title */}
+                <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${getGradient(category.color)} bg-clip-text text-transparent`}>
                   {category.category}
-                </span>
-              </h3>
+                </h3>
 
-              {/* Skills for this category */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <SkillBadge key={skillIndex} name={skill} color={category.color} />
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                {/* Skills List */}
+                <div className="space-y-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skillIndex}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
+                      className="flex items-start gap-2"
+                    >
+                      <span className={`text-sm font-semibold ${getTextColor(category.color)} mt-0.5 flex-shrink-0`}>•</span>
+                      <span className="text-sm text-muted-foreground">{skill}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
