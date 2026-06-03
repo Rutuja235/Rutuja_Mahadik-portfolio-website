@@ -4,20 +4,41 @@ import { motion } from 'framer-motion';
 import { SkillBadge } from './SkillBadge';
 
 const skillsData = [
-  { name: 'Python', color: 'cyan' as const },
-  { name: 'SQL', color: 'purple' as const },
-  { name: 'Data Structures & Algorithms', color: 'cyan' as const },
-  { name: 'OOP', color: 'purple' as const },
-  { name: 'Flask', color: 'pink' as const },
-  { name: 'Django', color: 'blue' as const },
-  { name: 'REST APIs', color: 'cyan' as const },
-  { name: 'Machine Learning', color: 'purple' as const },
-  { name: 'TensorFlow', color: 'pink' as const },
-  { name: 'Scikit-learn', color: 'blue' as const },
-  { name: 'NLP', color: 'cyan' as const },
-  { name: 'MongoDB', color: 'purple' as const },
-  { name: 'MySQL', color: 'pink' as const },
-  { name: 'Git & GitHub', color: 'blue' as const },
+  {
+    category: 'Programming',
+    skills: ['Python', 'SQL', 'JavaScript (Basics)'],
+    color: 'cyan' as const,
+  },
+  {
+    category: 'Backend & APIs',
+    skills: ['Flask', 'Django', 'REST APIs', 'API Integration'],
+    color: 'purple' as const,
+  },
+  {
+    category: 'Databases',
+    skills: ['MySQL', 'MongoDB'],
+    color: 'pink' as const,
+  },
+  {
+    category: 'Core CS',
+    skills: ['Data Structures', 'Algorithms', 'OOP', 'DBMS', 'Operating Systems', 'Computer Networks', 'Cyber Security Fundamentals'],
+    color: 'blue' as const,
+  },
+  {
+    category: 'Tools & Platforms',
+    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Docker'],
+    color: 'cyan' as const,
+  },
+  {
+    category: 'Development Practices',
+    skills: ['SDLC', 'Debugging', 'Unit Testing', 'CI/CD Fundamentals'],
+    color: 'purple' as const,
+  },
+  {
+    category: 'AI & Automation',
+    skills: ['NLP', 'Machine Learning', 'Data Science', 'AI-Assisted Development Tools'],
+    color: 'pink' as const,
+  },
 ];
 
 export function SkillsSection() {
@@ -32,12 +53,37 @@ export function SkillsSection() {
           <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
         </motion.div>
 
-        {/* Skills Grid */}
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {skillsData.map((skill, index) => (
-            <SkillBadge key={index} name={skill.name} color={skill.color} />
+        {/* Skills Grid by Category */}
+        <div className="space-y-12">
+          {skillsData.map((category, categoryIndex) => (
+            <motion.div
+              key={categoryIndex}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              className="glass-dark rounded-lg p-6"
+            >
+              {/* Category Title */}
+              <h3 className="text-xl md:text-2xl font-semibold mb-4">
+                <span className={`bg-gradient-to-r ${
+                  category.color === 'cyan' ? 'from-cyan-400 to-blue-500' :
+                  category.color === 'purple' ? 'from-purple-400 to-pink-500' :
+                  category.color === 'pink' ? 'from-pink-400 to-rose-500' :
+                  'from-blue-400 to-cyan-500'
+                } bg-clip-text text-transparent`}>
+                  {category.category}
+                </span>
+              </h3>
+
+              {/* Skills for this category */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {category.skills.map((skill, skillIndex) => (
+                  <SkillBadge key={skillIndex} name={skill} color={category.color} />
+                ))}
+              </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
